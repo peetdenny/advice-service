@@ -1,0 +1,24 @@
+{
+  "name": "advice-service",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js",
+    "test": "nodemon app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/peetdenny/advice-service.git"
+  },
+  "author": "",
+  "bugs": {
+    "url": "https://github.com/peetdenny/advice-service/issues"
+  },
+  "homepage": "https://github.com/peetdenny/advice-service#readme",
+  "dependencies": {
+    "body-parser": "^1.15.0",
+    "express": "^4.13.4",
+    "winston": "^2.2.0"
+  }
+}
