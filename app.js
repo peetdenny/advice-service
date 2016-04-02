@@ -5,7 +5,14 @@ var app = express();
 
 app.use( bodyParser.json() ); 
 
-const PORT = 3000;
+var args = process.argv.slice(2);
+
+if(!args || args.length != 1){
+	console.log("Please provide amqp uri in form amqp://user:password@host:port as input argument")
+	process.exit(-1)
+}
+
+var advice = require('./advice')(args[0])
 
 /**
  * POST request for an advice.
@@ -34,12 +41,11 @@ app.post('/api/advice', function (req, res) {
 	var questions = req.body.questions
 	var email = req.body.email
   
-	// TODO do the calc
-	logger.debug("Generating an advice for %s", email)
+	advice.process(email, questions)
 
   	res.send({"status" : "OK"})
 });
 
-app.listen(PORT, function () {
+app.listen(3000, function () {
 	logger.info('Advice service is up and running');
 });
