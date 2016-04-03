@@ -11,4 +11,4 @@ Service requires an access rabbitmq to send notifications. Configuration to thes
 
 
 These env variables can be passed when running a node app. For instance:
-<code>AMQP_URI=amqp://test:test@192.168.200.10 node app.js</code>
+<pre>AMQP_URI=amqp://test:test@192.168.200.10 node app.js</pre>
