@@ -37,7 +37,16 @@ module.exports = function(amqpUri) {
 		var score = 0;
 		questions.forEach ( function(item) {
 			var thisAnswer = answersMapping[item.question];
+			if(!thisAnswer){
+				logger.error("Get match question %s with data", item.question)
+				return;
+			}
+
 			var thisScore = thisAnswer[item.answer];
+			if(!thisScore){
+				logger.error("Get match answer %s with data %s", item.answer, thisAnswer)
+				return;
+			}
 
 			score += thisScore;
 		});

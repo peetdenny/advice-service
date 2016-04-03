@@ -4,8 +4,8 @@
   "description": "",
   "main": "app.js",
   "scripts": {
-    "start": "node app.js amqp://test:test@192.168.200.10",
-    "test": "nodemon app.js amqp://test:test@192.168.200.10"
+    "start": "AMQP_URI=amqp://test:test@192.168.200.10 node app.js",
+    "test": "AMQP_URI=amqp://test:test@192.168.200.10 nodemon app.js"
   },
   "repository": {
     "type": "git",

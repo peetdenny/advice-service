@@ -11,14 +11,14 @@ app.use(function(req, res, next) {
   next();
 });
 
-var args = process.argv.slice(2);
+var amqpUri = process.env.AMQP_URI
 
-if(!args || args.length != 1){
-	console.log("Please provide amqp uri in form amqp://user:password@host:port as input argument")
+if(!amqpUri){
+	console.log("Please set AMQP_URI environment variable. It has to be in form amqp://user:password@host:port")
 	process.exit(-1)
 }
 
-var advice = require('./advice')(args[0])
+var advice = require('./advice')(amqpUri)
 
 /**
  * POST request for an advice.
