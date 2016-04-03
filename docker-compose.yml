@@ -1,0 +1,16 @@
+nginx:
+    build: ./nginx
+    links:
+        - advice-service1:advice-service1
+        - advice-service2:advice-service2
+    ports:
+        - "80:80"
+advice-service1:
+    build: .
+    ports:
+        - "3000"
+advice-service2:
+    build: .
+    ports:
+        - "3000"
+
