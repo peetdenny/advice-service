@@ -6,11 +6,11 @@ nginx:
     ports:
         - "80:80"
 advice-service1:
-    build: ./app
+    build: .
     ports:
         - "3000"
 advice-service2:
-    build: ./app
+    build: .
     ports:
         - "3000"
 
