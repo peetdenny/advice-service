@@ -7,15 +7,61 @@ module.exports = function(amqpUri) {
 
 	var module = {}
 
+	var answersMapping = {
+		"How many hours have you been awake for so far?" : {
+			"less than 18 hours" : 8,
+			"18 - 24 hours" : 4,
+			"24 - 48 hours" : 2,
+			"more than 48 hours" : 1,
+		},
+
+		"How do you refer to your child?" : {
+			"Little Miss Pookums McCutiepie" : 7,
+			"My little cherub" : 5,
+			"Dave" : 3,
+			"That child" : 1,
+			"The Spawn" : -5,
+		},
+
+		"How many children have you fired out of a cannon?" : {
+			"0" : 10,
+			"1" : 2,
+			"A busload" : -10
+		},
+	}
+
 	module.process = function(email, questions) {
 
-		// TODO do the calc
-		logger.debug("Generating an advice for %s", email)
+		logger.debug("Calculating an advice for %s and %s", email, JSON.stringify(questions))
+
+		var score = 0;
+		questions.forEach ( function(item) {
+			var thisAnswer = answersMapping[item.question];
+			var thisScore = thisAnswer[item.answer];
+
+			score += thisScore;
+		});
+
+		var recommendation = "";
+		if(score == 25){
+			recommendation = "Wow, top marks. You are the most chilled-out parent in the world. You're like that old turtle dude out of Finding Nemo. Go on, be honest, you don't actually have kids yet, right?";
+		} else if (score > 14) {
+			recommendation = "Doing well message"
+		} else if (score > 0) {
+			recommendation = "Doing OK message"
+		} else if (score > -14) {
+			recommendation = "Doing badly message"
+		} else {
+			recommendation = "Everybody stand back! She's gonna blow! Seriously, you should put on your sou'wester, there's about to be a hurricaine.\nHere, here's two tickets to the spa. (One of them's not for your baby)"
+		}
+
 		var advice = {
 			email : email,
-			recommendation : "Go to sleep",
+			recommendation : recommendation,
 			timestamp : new Date()
 		}
+
+		logger.info("Calculated an advice %s with score %d", advice, score)
 
 		// send notification to document service
 		amqp.connect(amqpUri, {}, function(err, conn) {
