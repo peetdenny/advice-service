@@ -7,7 +7,7 @@ RUN apt-get update && apt-get install -qq -y build-essential apt-transport-https
 ENV INSTALL_PATH /usr/src/advice-service
 ENV AMQP_URI amqp://test:test@192.168.200.10
 RUN mkdir -p $INSTALL_PATH
-
+WORKDIR $INSTALL_PATH
 
 # Install app dependencies
 COPY package.json $INSTALL_PATH
@@ -19,5 +19,5 @@ RUN npm install
 COPY . .
 
 EXPOSE 3000
-CMD [ "node", "$INSTALL_PATH/app.js", "$AMQP_URI"]
+CMD [ "node", "app.js", "$AMQP_URI"]
 
