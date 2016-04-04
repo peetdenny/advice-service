@@ -5,28 +5,19 @@ RUN apt-get update && apt-get install -qq -y build-essential apt-transport-https
 
 # Create app directory
 ENV INSTALL_PATH /usr/src/advice-service
+ENV AMQP_URI amqp://test:test@192.168.200.10
 RUN mkdir -p $INSTALL_PATH
-
-
-WORKDIR $INSTALL_PATH
-# COPY requirements.txt requirements.txt
-# RUN pip install -r requirements.txt
 
 
 # Install app dependencies
 COPY package.json $INSTALL_PATH
 RUN npm install -g nodemon
-RUN npm install express
-RUN npm install body-parser
-RUN npm install logger
-RUN npm install winston
-RUN npm install amqplib
-
+RUN npm install 
 
 
 # Bundle app source
 COPY . .
 
 EXPOSE 3000
-CMD [ "nodemon", "$INSTALL_PATH/app.js", "amqp://user:password@host:port"]
+CMD [ "node", "$INSTALL_PATH/app.js", "$AMQP_URI"]
 
