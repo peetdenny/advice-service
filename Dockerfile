@@ -5,7 +5,7 @@ RUN apt-get update && apt-get install -qq -y build-essential apt-transport-https
 
 # Create app directory
 ENV INSTALL_PATH /usr/src/app
-ENV AMQP_URI amqp://test:test@172.30.0.206
+ENV AMQP_URI amqp://guest:guest@172.30.0.206
 
 RUN mkdir -p $INSTALL_PATH
 WORKDIR $INSTALL_PATH
