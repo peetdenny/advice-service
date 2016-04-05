@@ -66,7 +66,10 @@ module.exports = function(amqpUri) {
 
 		var advice = {
 			email : email,
-			recommendation : recommendation,
+			recommendation : {
+				message: recommendation,
+				score: score,
+			},
 			timestamp : new Date()
 		}
 
