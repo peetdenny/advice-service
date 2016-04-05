@@ -8,7 +8,6 @@ ENV INSTALL_PATH /usr/src/app
 ENV AMQP_URI amqp://test:test@172.30.0.206
 
 RUN mkdir -p $INSTALL_PATH
-
 WORKDIR $INSTALL_PATH
 
 # Install app dependencies
