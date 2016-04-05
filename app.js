@@ -52,6 +52,10 @@ app.post('/api/advice', function (req, res) {
   	res.send({"status" : "OK"})
 });
 
+app.get('/api/healthcheck', function (req, res) {
+  	res.send({"status" : "Alive"})
+});
+
 app.listen(3000, function () {
 	logger.info('Advice service is up and running');
 });
