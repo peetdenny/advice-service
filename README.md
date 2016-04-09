@@ -1,4 +1,4 @@
-# document-service
+# advice-service
 Demo of a Node microservice with REST API
 
 # Installation
@@ -21,3 +21,14 @@ It shall return {"status":"Alive"} when service is up and running
 
 POST /api/advice
 Calculates an advice based on user-supplied questions. Please refer to app.js for details.
+
+# Running docker container
+There are 2 advice-services running in separate container and behind load balancer. <br />
+To set up this properly, advice-service containers need to be run first:
+- cd ../advice-service
+- docker build -t advice-service . (build docker image first)
+- docker run -ti -d -p 3000 -e AMQP_URI='amqp://guest:guest@192.168.200.10' --name advice-service1  advice-service <br />
+(run first container with the name advice-service1; pass AMQP_URI environment variable and open port 3000)
+- docker run -ti -d -p 3000 -e AMQP_URI='amqp://guest:guest@192.168.200.10' --name advice-service2  advice-service <br />
+(do the same for container advice-service2)
+- now go and run advice-ui container
