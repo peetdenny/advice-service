@@ -23,7 +23,7 @@ POST /api/advice
 Calculates an advice based on user-supplied questions. Please refer to app.js for details.
 
 # Running docker container
-There are 2 advice-services running in separate containerisand behind load balancer. <br />
+There are 2 advice-services running in separate containers and behind nginx load balancer. <br />
 To set up this properly, advice-service containers need to be run first:
 - cd ../advice-service
 - docker build -t advice-service . (build docker image first)
